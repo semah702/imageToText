@@ -1,17 +1,20 @@
-import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
 from PIL import Image
+import pytesseract
 
-# PNG görüntüsünü yükleyin
-image_path = "D:/Users/SEMAH/Desktop/imageToText/testocr.png"
+# If you don't have tesseract executable in your PATH, include the following:
+# Manually dd tesseract path manual to your system environment variables
+# pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
+
+# Add image path from your local computer
+image_path = "testocr.png"
 image = Image.open(image_path)
 
-# Görüntüdeki metni okuyun
+# Read text from image
 text = pytesseract.image_to_string(image, lang='eng')
 
-# Metni bir metin dosyasına yazın
-output_file = "metin_dosyasi.txt"
+# Save text to file
+output_file = "output.txt"
 with open(output_file, 'w', encoding='utf-8') as file:
     file.write(text)
 
-print("Metin dosyası oluşturuldu:")
+print("Generated text file: ", output_file)
